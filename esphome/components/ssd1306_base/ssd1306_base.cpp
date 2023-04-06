@@ -115,29 +115,27 @@ void SSD1306::setup() {
   // Y flip mode (0xC0, 0xC8)
   this->command(SSD1306_COMMAND_COM_SCAN_INC | (this->flip_y_ << 3));
 
-  if (!this->is_sh1107_()) {
-    // Set pin configuration (0xDA)
-    this->command(SSD1306_COMMAND_SET_COM_PINS);
-    switch (this->model_) {
-      case SSD1306_MODEL_128_32:
-      case SH1106_MODEL_128_32:
-      case SSD1306_MODEL_96_16:
-      case SH1106_MODEL_96_16:
-        this->command(0x02);
-        break;
-      case SSD1306_MODEL_128_64:
-      case SH1106_MODEL_128_64:
-      case SSD1306_MODEL_64_48:
-      case SSD1306_MODEL_64_32:
-      case SH1106_MODEL_64_48:
-      case SSD1305_MODEL_128_32:
-      case SSD1305_MODEL_128_64:
-        this->command(0x12);
-        break;
-      case SH1107_MODEL_128_64:
-        // Not used, but prevents build warning
-        break;
-    }
+  // Set pin configuration (0xDA)
+  this->command(SSD1306_COMMAND_SET_COM_PINS);
+  switch (this->model_) {
+    case SSD1306_MODEL_128_32:
+    case SH1106_MODEL_128_32:
+    case SSD1306_MODEL_96_16:
+    case SH1106_MODEL_96_16:
+      this->command(0x02);
+      break;
+    case SSD1306_MODEL_128_64:
+    case SH1106_MODEL_128_64:
+    case SSD1306_MODEL_64_48:
+    case SSD1306_MODEL_64_32:
+    case SH1106_MODEL_64_48:
+    case SSD1305_MODEL_128_32:
+    case SSD1305_MODEL_128_64:
+      this->command(0x12);
+      break;
+    case SH1107_MODEL_128_64:
+      // Not used, but prevents build warning
+      break;
   }
 
   // Pre-charge period (0xD9)
